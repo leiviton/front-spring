@@ -1,0 +1,104 @@
+<!--Extended Table starts-->
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                            <button class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" (click)="open(content)"><i class="fa fa-user-plus"></i> Usuário</button>
+                            <input type="text" class="form-control col-md-12" placeholder="Pesquisar" name="search" [(ngModel)]="search" (change)="filteredUser()">
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Papel</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of result">
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.role }}</td>
+                                    <td>
+                                        <ui-switch checked checkedLabel="Ativo" uncheckedLabel="Inativo" defaultBgColor="red"></ui-switch>
+                                        <a class="primary p-2" data-original-title="" title="">
+                                            <i class="fa fa-edit font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="info p-0" data-original-title="" title="">
+                                            <i class="fa fa-eye font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+        <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header modal-user">
+                    <h4 class="modal-title">Novo Usuário</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <ngb-tabset>
+                                <ngb-tab title="Dados">
+                                  <ng-template ngbTabContent>
+                                        <form class="form">
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12 mb-2">
+                                                            <label class="sr-only" for="userinput3">Nome</label>
+                                                            <input type="text" id="userinput3" class="form-control border-primary" placeholder="Nome" name="username">
+                                                        </div>
+                                                        <div class="form-group col-md-6 mb-2">
+                                                            <label class="sr-only" for="userinput4">Email</label>
+                                                            <input type="text" id="userinput4" class="form-control border-primary" placeholder="Email" name="nickname">
+                                                        </div>
+                                                        <div class="form-group col-md-6 mb-2">
+                                                                <select class="form-control border-primary" id="xLargeSelect">
+                                                                        <option selected>Selecione papel</option>
+                                                                        <option value="admin">Administrador</option>
+                                                                        <option value="operator">Operador</option>
+                                                                        <option value="professional">Profissional</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="form-group col-md-6 mb-2">
+                                                                <label class="sr-only" for="userinput5">Senha</label>
+                                                                <input type="password" id="userinput5" class="form-control border-primary" placeholder="Senha" name="username">
+                                                            </div>
+                                                            <div class="form-group col-md-6 mb-2">
+                                                                <label class="sr-only" for="userinput6">Repita senha</label>
+                                                                <input type="password" id="userinput6" class="form-control border-primary" placeholder="Repita senha" name="nickname">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </form>     
+                                 </ng-template>
+                                </ngb-tab>
+                                <ngb-tab>
+                                  <ng-template ngbTabTitle><b>Permissões</b></ng-template>
+                                  <ng-template ngbTabContent>
+
+                                  </ng-template>
+                                </ngb-tab>
+                        </ngb-tabset>        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">Cancelar</button>
+                    <button type="button" class="btn btn-success btn-raised">Salvar</button>
+                </div>
+            </ng-template>
+</section>
+<!--Extended Table Ends-->

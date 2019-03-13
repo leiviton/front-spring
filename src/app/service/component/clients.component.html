@@ -1,0 +1,276 @@
+<!--Extended Table starts-->
+<section id="extended">
+    <div class="row dados-client">
+        <div class="col-md-4">
+            <button class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" (click)="open(content)"><i class="fa fa-plus"></i> Agendar Serviço</button>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Data:" aria-describedby="basic-addon4">
+                    <span class="input-group-addon" id="basic-addon4"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <fieldset class="form-group">
+                <select class="form-control" id="basicSelect">
+                    <option>Selecione Status</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-service">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="bg-purple d-block rounded-circle" style="width:30px; height:30px;cursor: pointer;" placement="top" ngbTooltip="Status"></span>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="font-weight-bold">Limpeza Geral</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <p class="p-card"><b>Status: </b> Aguardando</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Agendado: </b> 05/12/2018 ás 14:00</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Profissional:</b> Leiviton</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Nº de profissionais:</b> 5</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-footer-service text-center">
+                    <p><b>Valor Total:</b> R$ 200,00</p>
+                    <button class="btn btn-deep-purple btn-raised"><i class="fa fa-calendar"></i> Reagendar</button>
+                    <!--button class="btn btn-green btn-raised"><i class="fa fa-edit"></i> Alterar</button>
+                    <button class="btn btn-service btn-raised"><i class="fa fa-star"></i> Reagendar</button>
+                    <!--button class="btn btn-red btn-raised"><i class="fa fa-trash"></i> Cancelar</button-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-service">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="gradient-light-blue-cyan d-block rounded-circle" style="width:30px; height:30px;cursor: pointer;" placement="top" ngbTooltip="Status"></span>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="font-weight-bold">Limpeza Geral</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <p class="p-card"><b>Status: </b> Aguardando</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Agendado: </b> 05/12/2018 ás 14:00</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Profissional:</b> Leiviton</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Nº de profissionais:</b> 5</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-footer-service text-center">
+                    <p><b>Valor Total:</b> R$ 200,00</p>
+                    <button class="btn btn-deep-purple btn-raised"><i class="fa fa-calendar"></i> Reagendar</button>
+                    <!--button class="btn btn-green btn-raised"><i class="fa fa-edit"></i> Alterar</button-->
+                    <button class="btn btn-service btn-raised"><i class="fa fa-star"></i> Reagendar</button>
+                    <!--button class="btn btn-red btn-raised"><i class="fa fa-trash"></i> Cancelar</button-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-service">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span class="bg-red d-block rounded-circle" style="width:30px; height:30px; cursor: pointer;" placement="top" ngbTooltip="Status"></span>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="font-weight-bold">Limpeza Geral</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row">
+                            <p class="p-card"><b>Status: </b> Aguardando</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Agendado: </b> 05/12/2018 ás 14:00</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Profissional:</b> Leiviton</p>
+                        </div>
+                        <div class="row">
+                            <p class="p-card"><b>Nº de profissionais:</b> 5</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-footer-service text-center">
+                    <p><b>Valor Total:</b> R$ 200,00</p>
+                    <button class="btn btn-deep-purple btn-raised"><i class="fa fa-calendar"></i> Reagendar</button>
+                    <button class="btn btn-green btn-raised"><i class="fa fa-edit"></i> Alterar</button>
+                    <!--button class="btn btn-raised btn-service"><i class="fa fa-star"></i> Reagendar</button>
+                    <!--button class="btn btn-red btn-raised"><i class="fa fa-trash"></i> Cancelar</button-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header modal-view-prof">
+            <h4 class="modal-title">Agendar Serviço</h4>
+            <button type="button" class="close white" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true" class="white">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="form form-view" #myForm="ngForm">
+                <div class="form-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="cliente">Cliente:</label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="cliente">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="agendar" class="label-control">Agendar:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="agendar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <select class="form-control">
+                                        <option>Selecione Serviço</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <fieldset class="form-group">
+                                    <select class="form-control">
+                                        <option>Selecione produtos</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 mb-2">
+                                <label class="label-control" style="margin-bottom: 0px;">Descrição</label>
+                                <textarea name="name"  id="description_edit" class="form-control border-primary" rows="4" name="service.description" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <fieldset class="form-group">
+                                    <select class="form-control">
+                                        <option>Selecione Endereço</option>
+                                        <option>Option 1</option>
+                                        <option>Option 2</option>
+                                        <option>Option 3</option>
+                                        <option>Option 4</option>
+                                        <option>Option 5</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button class="btn btn-raised btn-primary white" (click)="open(content)" style="margin-right: -62px;"><i class="fa fa-plus"></i> Endereço</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p class="number-prof">Quantos profissionais precisa para este serviço?</p>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="qtd" class="label" style="margin-bottom: 0">Qtd:</label>
+                                    <input type="text" class="form-control" id="qtd">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="vlr" class="label" style="margin-bottom: 0">Valor Produtos:</label>
+                                    <input type="text" class="form-control" id="vlr">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="vlu" class="label" style="margin-bottom: 0">Valor unitário:</label>
+                                    <input type="text" class="form-control" id="vlu">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="vlt" class="label" style="margin-bottom: 0">Valor Total:</label>
+                                    <input type="text" class="form-control" id="vlt">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div style="float: left">
+                                    <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')"><i class="fa fa-close"></i> Cancelar</button>
+                                    <button type="button" class="btn btn-info btn-raised" [disabled]="!myForm.valid"><i class="fa fa-save"></i> Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</section>

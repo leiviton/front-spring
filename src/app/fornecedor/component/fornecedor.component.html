@@ -1,0 +1,204 @@
+<!--Extended Table starts-->
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                            <button class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" (click)="open(content)"><i class="fa fa-plus"></i> Fornecedor</button>
+                            <input type="text" class="form-control col-md-12" placeholder="Pesquisar" name="search" [(ngModel)]="search" (ngModelChange)="filteredServices($event)">
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Razão Social/Nome</th>
+                                    <th>Telefone</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="lengthServices == 0">
+                                    <td colspan="4">Sem informações</td>
+                                </tr>
+                                <tr *ngFor="let service of result">
+                                    <td>{{ service.razaoSocial }}</td>
+                                    <td>{{ service.telefone }}</td>
+                                    <td>{{ service.status }}</td>
+                                    <td>
+                                        <ui-switch [checked]="service.status == 'ativo'" checkedLabel="Ativo  " uncheckedLabel="Inativo" defaultBgColor="red" (change)="updateStatus(service.id)"></ui-switch>
+                                        <a class="primary p-2" data-original-title="" title="" ngx-tooltip="Editar Serviço" (click)="openView(edit,service.id, service.status)">
+                                            <i class="fa fa-edit font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="info p-0" data-original-title="" title="" ngx-tooltip="Visualizar" (click)="openView(view, service.id)">
+                                            <i class="fa fa-eye font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+        <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header modal-service">
+                    <h4 class="modal-title">Novo Serviço</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <ngb-tabset #t="ngbTabset">
+                                <ngb-tab title="Dados do serviço" id="service_dados">
+                                  <ng-template ngbTabContent>
+                                        <form class="form" #myForm="ngForm" >
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-8 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">CNPJ</label>
+                                                            <input type="text" id="name" class="form-control border-primary" placeholder="Nome do serviço" name="service.name" required [(ngModel)]="cnpj"  #name="ngModel" (keyup)="getCnpj(cnpj)">
+                                                            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                                                <small class="form-text text-muted danger" *ngIf="name.errors.required">Nome é obrigatório</small>
+                                                                <small class="form-text text-muted danger" *ngIf="name.errors.minlength">Nome requer minimo 4 caracteres</small>
+                                                            </div>
+                                                        </div>
+                                                
+                                                    </div>
+                                                </div>
+                                            </form>
+                                 </ng-template>
+                                </ngb-tab>
+                        </ngb-tabset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">Cancelar</button>
+                    <button type="button" class="btn btn-success btn-raised" (click)="save()">Salvar</button>
+                </div>
+            </ng-template>
+</section>
+<section>
+        <ng-template #view let-c="close" let-d="dismiss">
+                <div class="modal-header modal-service">
+                    <h4 class="modal-title">Detalhes do Serviço</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <ngb-tabset #t="ngbTabset">
+                                <ngb-tab title="Dados do serviço" id="service_dados">
+                                  <ng-template ngbTabContent>
+                                        <form class="form" >
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-8 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Nome</label>
+                                                            <input type="text" id="name_edit" class="form-control border-primary" placeholder="Nome do serviço" name="service.name" required [(ngModel)]="service.name"  #name="ngModel" disabled>
+                                                        </div>
+                                                        <div class="form-group col-md-4 mb-2">
+                                                                <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Unidade de medida</label>
+                                                                <select class="form-control border-primary"   name="unit_edit" [(ngModel)]="service.unit" #unit="ngModel"  disabled>
+                                                                        <option value="">Selecione a unidade</option>
+                                                                        <option value="m">Metro</option>
+                                                                        <option value="l">Litro</option>
+                                                                        <option value="kg">Quilograma</option>
+                                                                        <option value="m2">Metro quadrado</option>
+                                                                        <option value="a">Área</option>
+                                                                        <option value="m3">Metro cúbico</option>
+                                                                        <option value="mi">Minutos</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="form-group col-md-8 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Descrição</label>
+                                                            <textarea name="name"  id="description_edit" class="form-control border-primary" rows="9" cols="80"  name="service.description" required [(ngModel)]="service.description"  #description="ngModel" disabled></textarea>
+                                                        </div>
+                                                        <div class="form-group col-md-4 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Valor da unidade</label>
+                                                            <input type="text" id="value_edit" class="form-control border-primary" placeholder="Valor da unidade" name="service.value" required [(ngModel)]="service.value"  currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" #value="ngModel" disabled>
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px; margin-top: 15px;">Tipo de serviço</label>
+                                                            <select class="form-control border-primary" id="type_service_edit"  name="service.type_service" [(ngModel)]="service.type_service" #type_service="ngModel" disabled >
+                                                                    <option value="">Tipo do serviço</option>
+                                                                    <option value="residential">Residencial</option>
+                                                                    <option value="commercial">Comercial</option>
+                                                            </select>
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px; margin-top: 15px;">Tempo</label>
+                                                            <input type="text" id="time_edit" class="form-control border-primary" currencyMask placeholder="Tempo médio" name="service.time" required [(ngModel)]="service.time" #time="ngModel" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                 </ng-template>
+                                </ngb-tab>
+                        </ngb-tabset>
+                </div>
+            </ng-template>
+</section>
+
+<!--Edit Service-->
+<section>
+        <ng-template #edit let-c="close" let-d="dismiss">
+                <div class="modal-header modal-service">
+                    <h4 class="modal-title">Editar Serviço</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        <ngb-tabset #t="ngbTabset">
+                                <ngb-tab title="Dados do serviço" id="service_dados">
+                                  <ng-template ngbTabContent>
+                                        <form class="form" >
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="form-group col-md-8 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Nome</label>
+                                                            <input type="text" id="name_edit" class="form-control border-primary" placeholder="Nome do serviço" name="service.name" required [(ngModel)]="service.name"  #name="ngModel">
+                                                        </div>
+                                                        <div class="form-group col-md-4 mb-2">
+                                                                <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Unidade de medida</label>
+                                                                <select class="form-control border-primary"   name="unit_edit" [(ngModel)]="service.unit" #unit="ngModel" >
+                                                                        <option value="">Selecione a unidade</option>
+                                                                        <option value="m">Metro</option>
+                                                                        <option value="l">Litro</option>
+                                                                        <option value="kg">Quilograma</option>
+                                                                        <option value="m2">Metro quadrado</option>
+                                                                        <option value="a">Área</option>
+                                                                        <option value="m3">Metro cúbico</option>
+                                                                        <option value="mi">Minutos</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="form-group col-md-8 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Descrição</label>
+                                                            <textarea name="description_edit"  id="description_edit" class="form-control border-primary" rows="9" cols="80"  name="service.description" required [(ngModel)]="service.description"  #description="ngModel"></textarea>
+                                                        </div>
+                                                        <div class="form-group col-md-4 mb-2">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px;">Valor da unidade</label>
+                                                            <input type="text" id="value_edit" class="form-control border-primary" placeholder="Valor da unidade" name="service.value" required [(ngModel)]="service.value"  currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" #value="ngModel">
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px; margin-top: 15px;">Tipo de serviço</label>
+                                                            <select class="form-control border-primary" id="type_service_edit"  name="service.type_service" [(ngModel)]="service.type_service" #type_service="ngModel" >
+                                                                    <option value="">Tipo do serviço</option>
+                                                                    <option value="residential">Residencial</option>
+                                                                    <option value="commercial">Comercial</option>
+                                                            </select>
+                                                            <label for="basicInput" _ngcontent-c8="" style="color:#009DA0; margin-bottom: 0px; margin-top: 15px;">Tempo</label>
+                                                            <input  type="number"  id="time_edit" class="form-control border-primary"placeholder="Tempo médio" name="service.time" required [(ngModel)]="service.time" #time="ngModel">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">Cancelar</button>
+                                                <button type="button" class="btn btn-success btn-raised" (click)="update()">Editar</button>
+                                            </div>
+                                 </ng-template>
+                                </ngb-tab>
+                        </ngb-tabset>
+                </div>
+            </ng-template>
+</section>
+<!--Extended Table Ends-->

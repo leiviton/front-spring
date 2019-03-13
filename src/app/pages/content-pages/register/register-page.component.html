@@ -1,0 +1,153 @@
+<!--Registration Page Starts-->
+<section id="register">
+    <div class="container">
+        <div class="row full-height-vh reg">
+            <div class="col-3 d-sm-none d-md-block d-lg-block"></div>
+            <div class="col-md-6 col-lg-6 col-sm-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body ps-scrollbar-y-rail" style="height: 585px;overflow-x: hidden; overflow-y: auto">
+                        <div class="row" style="padding-top: 6px">
+                            <div class="text-center col-12">
+                                <h4 class="title" style="font-weight: 600">Cadastro de membros</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 align-items-center">
+                                <div class="card-block mx-auto col-12" style="padding-bottom: 0">
+                                    <form #f="ngForm">
+                                        <div class="image-profile text-center"  (click)="file.click()">
+                                            <img width="80" height="80" [src]="urlImage" style="border-radius: 50%">
+                                            <input type="file" accept="image/*" #file style="display: none" (change)="upload($event)">
+                                        </div>
+                                        <br>
+                                        <div class="form-group mb-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 register-input">
+                                            <input type="text" class="form-control" name="fname" id="fname"
+                                                   placeholder="Nome" [(ngModel)]="client.nome" required #nome="ngModel">
+                                            <div class="mb-0" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="nome.errors.required">Nome é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="fnamelast" id="fnamelast"
+                                                   placeholder="Sobrenome" [(ngModel)]="client.sobrenome" required #lastname="ngModel">
+                                            <div class="mb-0" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="lastname.errors.required">Sobrenome é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="mae" id="mae"
+                                                   placeholder="Nome da mãe" [(ngModel)]="client.mae" required #mae="ngModel">
+                                            <div class="mb-0" *ngIf="mae.invalid && (mae.dirty || mae.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="mae.errors.required">Nome da mãe é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="pai" id="pai"
+                                                   placeholder="Nome do pai" [(ngModel)]="client.pai" required #pai="ngModel">
+                                            <div class="mb-0" *ngIf="pai.invalid && (pai.dirty || pai.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="pai.errors.required">Nome do pai é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="datanasc" id="datanasc"
+                                                   placeholder="Data de nascimento" [(ngModel)]="client.data_nascimento" required [imask]="{mask: '00/00/0000'}" #data_nascimento="ngModel">
+                                            <div class="mb-0" *ngIf="data_nascimento.invalid && (data_nascimento.dirty || data_nascimento.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="data_nascimento.errors.required">Data de nascimento é obrigatória</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="inputCpf" id="inputCpf"
+                                                   placeholder="CPF" [(ngModel)]="client.cpf"
+                                                   [imask]="{mask: '000.000.000-00'}" required #cpf="ngModel" (keyup)="validCPF(client.cpf)" minlength="14">
+                                            <div class="mb-0" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="cpf.errors.required">CPF é obrigatório</small>
+                                                <small class="form-text text-muted danger" *ngIf="cpf.errors.minlength">Tamanho minimo do CPF é 11 caracteres</small>
+                                            </div>
+                                            <small class="form-text text-muted danger" *ngIf="!cpf.invalid && valid == false">CPF inválido</small>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="rg" id="rg"
+                                                   placeholder="RG" [(ngModel)]="client.rg"
+                                                   required #rg="ngModel">
+                                            <div class="mb-0" *ngIf="rg.invalid && (rg.dirty || rg.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="rg.errors.required">Telefone é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="email" class="form-control" name="inputEmail" id="inputEmail"
+                                                   placeholder="Email" [(ngModel)]="client.email" required email #email="ngModel">
+                                            <div class="mb-0" *ngIf="email.invalid && (email.dirty || email.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="email.errors.required">Email é obrigatório</small>
+                                                <small class="form-text text-muted danger" *ngIf="email.errors.email">Email inválido</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                                <input type="text" class="form-control" name="inputPhone" id="inputPhone"
+                                                       placeholder="Whatsapp" [(ngModel)]="client.whatsapp"
+                                                       [imask]="{mask: '{+55} (00) 0000-00000'}" required #tel="ngModel">
+                                                <div class="mb-0" *ngIf="tel.invalid && (tel.dirty || tel.touched)">
+                                                    <small class="form-text text-muted danger" *ngIf="tel.errors.required">Telefone é obrigatório</small>
+                                                </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="cep" id="cep"
+                                                   placeholder="CEP" [(ngModel)]="client.address.postal_code" required #cep="ngModel" [imask]="{mask: '00.000-000'}" [unmask]="true" (keyup)="getCep(client.address.postal_code)" #postal_code="ngModel" minlength="8">
+                                            <div class="mb-0" *ngIf="cep.invalid && (cep.dirty || cep.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="cep.errors.required">CEP é obrigatório</small>
+                                                <small class="form-text text-muted danger" *ngIf="cep.errors.minlength">CEP deve conter minimo 8 caracteres</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="endereco" id="address"
+                                                   placeholder="Endereço" [(ngModel)]="client.address.street" required #address="ngModel">
+                                            <div class="mb-0" *ngIf="address.invalid && (address.dirty || address.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="address.errors.required">Endereço é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="number" id="number"
+                                                   placeholder="Numero" [(ngModel)]="client.address.number" required #number="ngModel">
+                                            <div class="mb-0" *ngIf="number.invalid && (number.dirty || number.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="number.errors.required">Numero é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="bairro" id="distric"
+                                                   placeholder="Bairro" [(ngModel)]="client.address.neighborhood" required #bairro="ngModel">
+                                            <div class="mb-0" *ngIf="bairro.invalid && (bairro.dirty || bairro.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="bairro.errors.required">Endereço é obrigatório</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="city" id="city"
+                                                   placeholder="Cidade" [(ngModel)]="client.address.city" required #city="ngModel" disabled>
+                                            <div class="mb-0" *ngIf="city.invalid && (city.dirty || city.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="city.errors.required">Cidade é obrigatório</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-12 col-12 register-input">
+                                            <input type="text" class="form-control" name="state" id="state"
+                                                   placeholder="Estado" [(ngModel)]="client.address.state" required #state="ngModel" disabled>
+                                            <div class="mb-0" *ngIf="state.invalid && (state.dirty || state.touched)">
+                                                <small class="form-text text-muted danger" *ngIf="state.errors.required">Estado é obrigatório</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-12 col-12 text-center" style="padding-bottom: 0">
+                                            <button type="button" class="btn btn-green btn-raised btn-block" [disabled]="!f.valid || client.img_profile == '' || (valid == false && validC == false)"
+                                                    (click)="onSubmit()">Cadastra-se
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</section>
+<!--Registration Page Ends-->

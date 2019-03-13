@@ -1,0 +1,209 @@
+// Remove this SCSS from production
+.main-content {
+    .color-palette {
+        .color-group {
+            li{
+                list-style-type: none;
+                &.main-color{
+                    border-bottom: 4px solid #fafafa;
+                }
+                &.color{
+                    padding: 10px 15px 11px;
+                    margin: 0;
+                    &.main-color{
+                        .name{
+                            display: block;
+                            margin-bottom: 53px;
+                            font-size: 2rem;
+                        }
+                    }
+                    .hex{
+                        float: right;
+                        text-transform: uppercase;
+                        display: block;
+                    }
+                }
+            }
+            &:last-child {
+                li{
+                    &.main-color{
+                        border-bottom: 4px solid #fafafa;
+                    }
+                    &.color{
+                        padding: 10px 15px 11px;
+                        margin: 0;
+                        &.main-color{
+                            .name{
+                                display: block;
+                                margin-bottom: 53px;
+                                font-size: 2rem;
+                            }
+                        }
+                        .hex{
+                            float: right;
+                            text-transform: uppercase;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+        .light-strong{
+            span{
+                color: #fff;
+            }
+        }
+        .dark{
+            span{
+                color: rgba(0,0,0,.87);
+            }
+        }
+        span{
+            color: rgba(255,255,255,.87);
+            font-size: 14px;
+            font-weight: 500;
+            &.light-strong{
+                color: #fff;
+            }
+            &.dark{
+                color: rgba(0,0,0,.87);
+            }
+        }
+    }
+}
+
+/*loading*/
+#bifrostBarSpinner{
+    z-index: 9999999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: wait;
+    display: none;
+}
+.bifrost-spinner-container{
+    position:fixed;
+    background:#394d62;
+    opacity:.7;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:999;
+}
+.bifrost-spinner-loader{
+    margin:0 auto;
+    width:60px;
+    height:50px;
+    text-align:center;
+    font-size:10px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translateY(-50%) translateX(-50%) !important;
+    z-index:1000;
+}
+.bifrost-spinner-loader > div{
+    height:100%;
+    width:8px;
+    display:inline-block;
+    float:left;
+    margin-left:2px;
+    -webkit-animation:a .8s infinite ease-in-out;animation:a .8s infinite ease-in-out;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar1{
+    background-color:#d9e3e8;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar2{
+    background-color:#106aaf;
+    -webkit-animation-delay:-.7s;
+    animation-delay:-.7s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar3{
+    background-color:#c1c1c1;
+    -webkit-animation-delay:-.6s;
+    animation-delay:-.6s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar4{
+    background-color:#c8d112;
+    -webkit-animation-delay:-.5s;
+    animation-delay:-.5s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar5{
+    background-color:#d9e3e8;
+    -webkit-animation-delay:-.4s;
+    animation-delay:-.4s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar6{
+    background-color:#106aaf;
+    -webkit-animation-delay:-.3s;
+    animation-delay:-.3s;
+}
+@-webkit-keyframes a{
+    0%,40%,to{
+        -webkit-transform:scaleY(.05)
+    }
+    20%{
+        -webkit-transform:scaleY(1)
+    }
+}
+@keyframes a{
+    0%,40%,to{
+        transform:scaleY(.05);
+        -webkit-transform:scaleY(.05);
+    }
+    20%{
+        transform:scaleY(1);
+        -webkit-transform:scaleY(1)
+    }
+}
+
+.services{
+    margin: 0 !important;
+    padding: 2px !important;
+}
+
+
+.switch.checked {
+    min-width: 100px !important;
+}
+
+.selecionado {
+    background: #1d3ce4;
+    color: #fff;
+}
+
+.selecionado:hover{
+    background: #2b66e4;
+    color: #fff;
+}
+
+.p-card{
+    margin-bottom: 0.5rem !important;
+}
+.btn-service{
+    background-color: #ffeb3b !important;
+    color: #222222 !important;
+    border-color: #ffeb3b;
+}
+
+.card-footer-service{
+    padding: 0 0.5rem !important;
+}
+
+.card-service{
+    box-shadow: 6px 6px 9px 5px rgba(0, 0, 0, 0.08), 11px 15px 32px 5px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 6px 6px 9px 5px rgba(0, 0, 0, 0.08), 11px 15px 32px 5px rgba(0, 0, 0, 0.08);
+}
+
+.label-professional{
+    margin-bottom: 0px !important;
+}
+
+@media (max-width: 675px) {
+    .reg{
+        margin-top: -5px !important;
+    }
+}

@@ -1,0 +1,150 @@
+<!--Extended Table starts-->
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover">
+                        <i class="fa fa-plus"></i> Membro
+                    </button>
+                    <input type="text" class="form-control col-md-12" placeholder="Pesquisar" name="search" [(ngModel)]="search" (ngModelChange)="filteredClient($event)">
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>WhatsApp</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngIf="lengthClient == 0">
+                                    <td colspan="5">Sem dados</td>
+                                </tr>
+                                <tr *ngFor="let client of result">
+                                    <td>{{ client.nome }}</td>
+                                    <td>{{ client.whatsapp }}</td>
+                                    <td>
+                                        <a class="info p-0" placement="top" ngbTooltip="Visualizar" (click)="openView(view,client.id)">
+                                            <i class="fa fa-eye font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <ng-template #view let-c="close" let-d="dismiss">
+        <div class="modal-header modal-view-prof">
+            <h4 class="modal-title">Detalhes do membro</h4>
+            <button type="button" class="close white" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true" class="white">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="form form-view" #myForm="ngForm">
+                <div class="form-body">
+                    <div class="col-md-12 mb-2">
+                        <h6 class="title-view">Dados Pessoais</h6>
+                        <div class="row border-view">
+                            <div class="col-md-12">
+                                <div class="row dados-client">
+
+                                </div>
+                                <div class="row dados-client">
+                                    <div class="col-md-4">
+                                        <div class="text-white text-center photo-changer">
+                                            <img src="{{ client.img_profile != null ? url_api +'/storage/members/'+client.img_profile:''}}" alt="" style="border-radius: 50%;border: #8c8c8c solid 1px;" width="75" height="75">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">Nome:</b> {{ client.nome }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">Sobrenome:</b> {{ client.sobrenome }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">RG:</b> {{ client.rg }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">CPF:</b> {{ client.cpf }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">Pai:</b> {{ client.mae }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="font-small-3"><b class="text-info">Mãe:</b> {{ client.pai }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row dados-client">
+
+                                </div>
+                                <div class="row dados-client">
+
+                                </div>
+                                <br>
+                                <div class="row dados-client">
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">Whatsapp <i class="fa fa-whatsapp"></i></b> {{ client.whatsapp }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">Email:</b> {{ client.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let s of address; let i = index">
+                            <h6 class="title-view-p" *ngIf="address.length > 0">Endereço</h6>
+                            <div class="row border-view">
+                                <div class="col-md-12">
+                                    <div class="row dados-client">
+                                        <div class="col-md-8">
+                                            <p class="font-small-3"><b class="text-info">Endereço:</b> {{ s.street }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="font-small-3"><b class="text-info">Numero:</b> {{ s.number }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row dados-client">
+                                        <div class="col-md-4">
+                                            <p class="font-small-3"><b class="text-info">Complemento:</b> {{ s.complement }}</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="font-small-3"><b class="text-info">Bairro:</b> {{ s.neighborhood }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row dados-client">
+                                        <div class="col-md-4">
+                                            <p class="font-small-3"><b class="text-info">Cidade:</b> {{ s.city }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="font-small-3"><b class="text-info">Estado:</b> {{ s.state }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="font-small-3"><b class="text-info">CEP:</b> {{ s.postal_code }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</section>

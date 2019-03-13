@@ -1,0 +1,24 @@
+#spnMostrarSenha {
+  cursor: pointer;
+  margin-left: -2px;
+}
+#register{
+  background-image: linear-gradient(45deg, #3949ab, #4fc3f7);
+  width: 100% !important;
+  height: 100% !important;
+}
+.register-input{
+  margin-bottom: 0.5em !important;
+}
+
+.modal-novo{
+  overflow-y: auto;
+}
+
+.image-profile {
+  img {
+    // border: 2px solid #005d41;
+    border-radius: 50%;
+    border: #222222 1px solid;
+  }
+}

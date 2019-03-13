@@ -1,0 +1,391 @@
+<!--Extended Table starts-->
+<section id="extended">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-raised gradient-purple-bliss white shadow-z-1-hover" (click)="open(content)">
+                        <i class="fa fa-plus"></i> Produto
+                    </button>
+                    <input type="text" class="form-control col-md-12" placeholder="Pesquisar" name="search"
+                           [(ngModel)]="search" (ngModelChange)="filteredOperator($event)">
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Categoria</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngIf="lengthOperators == 0">
+                                <td colspan="5">Sem informações</td>
+                            </tr>
+                            <tr *ngFor="let operator of result">
+                                <td>{{ operator.nome }}</td>
+                                <td>{{ operator.preco | currency:'BRL':true }}</td>
+                                <td>{{ operator.categoria.nome }}</td>
+                                <td>
+                                    <!--ui-switch [checked]="operator.status == 'ativo'" checkedLabel="Ativo  "
+                                               uncheckedLabel="Inativo" defaultBgColor="red"
+                                               (change)="updateStatus(operator.id)"></ui-switch-->
+                                    <a class="primary p-2" data-original-title="" title="" ngx-tooltip="Editar Operador"
+                                       (click)="openView(edit,operator.id, operator.status)">
+                                        <i class="fa fa-edit font-medium-3 mr-2"></i>
+                                    </a>
+                                    <a class="info p-0" data-original-title="" title="" ngx-tooltip="Visualizar"
+                                       (click)="openView(view,operator.id)">
+                                        <i class="fa fa-eye font-medium-3 mr-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header modal-operator">
+            <h4 class="modal-title">Novo produto</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="form" #myForm="ngForm">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="form-group col-md-8 mb-2">
+                            <label style="color:#009DA0; margin-bottom: 0px;">Nome</label>
+                            <input type="text" id="name" class="form-control border-primary"
+                                   placeholder="Nome" name="operator.name" required
+                                   [(ngModel)]="produto.nome" minlength="4" #name="ngModel">
+                            <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                <small class="form-text text-muted danger" *ngIf="name.errors.required">Nome
+                                    é obrigatório
+                                </small>
+                                <small class="form-text text-muted danger" *ngIf="name.errors.minlength">
+                                    Nome requer minimo 4 caracteres
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 mb-2">
+                            <label style="color:#009DA0; margin-bottom: 0px;">Preço</label>
+                            <input type="text" id="birth_date" class="form-control border-primary"
+                                   placeholder="Preço" name="operator.preco"
+                                   [(ngModel)]="produto.preco" #birth_date="ngModel" required>
+                            <div *ngIf="birth_date.invalid && (birth_date.dirty || birth_date.touched)">
+                                <small class="form-text text-muted danger"
+                                       *ngIf="birth_date.errors.required">Preço é obrigatório
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 mb-2">
+                            <label style="color:#009DA0; margin-bottom: 0px;">Descrição</label>
+                            <textarea name="description"  id="description" class="form-control border-primary" rows="9" name="operator.descricao" required [(ngModel)]="produto.descricao"  #description="ngModel"></textarea>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)">
+                                <small class="form-text text-muted danger" *ngIf="description.errors.required">Descrição é obrigatório</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="float: right">
+                    <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn btn-info btn-raised"
+                            (click)="t.select('operator_acessos')" [disabled]="!myForm.valid">Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</section>
+
+<section>
+    <ng-template #view let-c="close" let-d="dismiss">
+        <div class="modal-header modal-view-prof">
+            <h4 class="modal-title">Detalhes do operador</h4>
+            <button type="button" class="close white" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true" class="white">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form class="form form-view" #myForm="ngForm">
+                <div class="form-body">
+                    <div class="col-md-12 mb-2">
+                        <h6 class="title-view">Dados Pessoais</h6>
+                        <div class="row border-view">
+                            <div class="col-md-12">
+                                <div class="row dados-client">
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">Nome:</b> {{ operator.name }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">Data de Nascimento:</b> {{
+                                            operator.birth_date }}</p>
+                                    </div>
+                                </div>
+                                <div class="row dados-client">
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">CPF:</b> {{ operator.cpf }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">RG:</b> {{ operator.rg }}</p>
+                                    </div>
+                                </div>
+                                <div class="row dados-client">
+                                    <div class="col-md-6">
+                                        <p class="font-small-3"><b class="text-info">Celular:</b> {{
+                                            operator.celphone_number }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="title-view-p">Endereço</h6>
+                        <div class="row border-view">
+                            <div class="col-md-12">
+                                <div class="row dados-client">
+                                    <div class="col-md-8">
+                                        <p class="font-small-3"><b class="text-info">Endereço:</b> {{ operator.address
+                                            }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="font-small-3"><b class="text-info">Numero:</b> {{ operator.number }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row dados-client">
+                                    <div class="col-md-4">
+                                        <p class="font-small-3"><b class="text-info">Complemento:</b> {{
+                                            operator.complement }}</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="font-small-3"><b class="text-info">Bairro:</b> {{
+                                            operator.neighborhood }}</p>
+                                    </div>
+                                </div>
+                                <div class="row dados-client">
+                                    <div class="col-md-4">
+                                        <p class="font-small-3"><b class="text-info">Cidade:</b> {{ operator.city }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="font-small-3"><b class="text-info">Estado:</b> {{ operator.uf }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="font-small-3"><b class="text-info">CEP:</b> {{ operator.postal_code }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="title-view-p">Dados de acesso</h6>
+                        <div class="row border-view">
+                            <div class="col-md-12">
+                                <div class="row dados-client">
+                                    <div class="col-md-8">
+                                        <p class="font-small-3"><b class="text-info">Email:</b> {{ operator.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</section>
+
+<!--Editar um Operador-->
+
+<section>
+    <ng-template #edit let-c="close" let-d="dismiss">
+        <div class="modal-header modal-operator">
+            <h4 class="modal-title">Editar Operador</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <ngb-tabset #t="ngbTabset">
+                <ngb-tab title="Dados Pessoais" id="operator_dados_view">
+                    <ng-template ngbTabContent>
+                        <form class="form" #myForm="ngForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="form-group col-md-8 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Nome</label>
+                                        <input type="text" id="name_edit" class="form-control border-primary"
+                                               placeholder="Nome" name="operator.name" required
+                                               [(ngModel)]="operator.name" minlength="4" #name="ngModel">
+                                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                            <small class="form-text text-muted danger" *ngIf="name.errors.required">Nome
+                                                é obrigatório
+                                            </small>
+                                            <small class="form-text text-muted danger" *ngIf="name.errors.minlength">
+                                                Nome requer minimo 4 caracteres
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Data de nascimento</label>
+                                        <input type="text" id="birth_date_edit" class="form-control border-primary"
+                                               placeholder="Data de nascimento" [imask]="{mask: '00/00/0000'}"
+                                               [unmask]="false" name="operator.birth_date"
+                                               [(ngModel)]="operator.birth_date" #birth_date="ngModel" required>
+                                        <div *ngIf="birth_date.invalid && (birth_date.dirty || birth_date.touched)">
+                                            <small class="form-text text-muted danger"
+                                                   *ngIf="birth_date.errors.required">Data de nascimento é obrigatória
+                                            </small>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">CPF</label>
+                                        <input type="text" id="cpf_edit" class="form-control border-primary"
+                                               placeholder="CPF" [imask]="{mask: '000.000.000-00'}" [unmask]="true"
+                                               name="operator.cpf" [(ngModel)]="operator.cpf" #cpf="ngModel"
+                                               (keyup)="validCPF(operator.cpf)" required>
+                                        <div *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+                                            <small class="form-text text-muted danger" *ngIf="cpf.errors.required">CPF é
+                                                obrigatório
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">RG</label>
+                                        <input type="text" id="rg_edit" class="form-control border-primary"
+                                               placeholder="RG" name="operator.rg" [(ngModel)]="operator.rg"
+                                               #rg="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Cep</label>
+                                        <input type="text" id="postal_code_edit" class="form-control border-primary"
+                                               placeholder="Cep / Busca cep" name="operator.postal_code"
+                                               [(ngModel)]="operator.postal_code" [imask]="{mask: '00.000-000'}"
+                                               [unmask]="true" minlength="8" maxlength="10"
+                                               (blur)="getCep(operator.postal_code)" #postal_code="ngModel">
+                                        <div *ngIf="postal_code.invalid && (postal_code.dirty || postal_code.touched)">
+                                            <small class="form-text text-muted danger"
+                                                   *ngIf="postal_code.errors.minlength">Cep requer minimo 8 caracteres
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Endereço</label>
+                                        <input type="text" id="address_edit" class="form-control border-primary"
+                                               placeholder="Endereço" name="operator.address"
+                                               [(ngModel)]="operator.address" #address="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Número</label>
+                                        <input type="text" id="number_edit" class="form-control border-primary"
+                                               placeholder="Número" name="operator.number" [(ngModel)]="operator.number"
+                                               #number="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Complemento</label>
+                                        <input type="text" id="complement_edit" class="form-control border-primary"
+                                               placeholder="Complemento" name="operator.complement"
+                                               [(ngModel)]="operator.complement" #complement="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Bairro</label>
+                                        <input type="text" id="neighborhood_edit" class="form-control border-primary"
+                                               placeholder="Bairro" name="operator.neighborhood"
+                                               [(ngModel)]="operator.neighborhood" #neighborhood="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-2 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Estado</label>
+                                        <input class="form-control border-primary" type="text" id="state_edit_edit"
+                                               placeholder="Estado" name="operator.uf" [(ngModel)]="operator.uf"
+                                               #uf="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-6 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Cidade</label>
+                                        <input class="form-control border-primary" id="city_edit" type="text"
+                                               placeholder="Cidade" name="operator.city" [(ngModel)]="operator.city"
+                                               #city="ngModel">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Celular</label>
+                                        <input type="text" id="celphone_number_edit" class="form-control border-primary"
+                                               placeholder="Telefone" name="operator.celphone_number"
+                                               [(ngModel)]="operator.celphone_number"
+                                               [imask]="{mask: '+{55}(00)00000-0000'}" #celphone_number="ngModel">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div style="float: right">
+                                <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">
+                                    Cancelar
+                                </button>
+                                <button type="button" class="btn btn-info btn-raised"
+                                        (click)="t.select('operator_acessos_edit')" [disabled]="!myForm.valid">Próximo
+                                </button>
+                            </div>
+                        </form>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab id="operator_acessos_edit">
+                    <ng-template ngbTabTitle><b>Dados de acesso</b></ng-template>
+                    <ng-template ngbTabContent>
+                        <form class="form" #formCount="ngForm">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6 mb-2">
+                                        <label for="basicInput" _ngcontent-c8=""
+                                               style="color:#009DA0; margin-bottom: 0px;">Email</label>
+                                        <input type="email" id="email_edit" class="form-control border-primary"
+                                               placeholder="Email" name="operator.email" [(ngModel)]="operator.email"
+                                               #email="ngModel" required>
+                                        <div *ngIf="email_edit.invalid && (email_edit.dirty || email_edit.touched)">
+                                            <small class="form-text text-muted danger"
+                                                   *ngIf="email_edit.errors.required">Email obrigatorio
+                                            </small>
+                                            <small class="form-text text-muted danger" *ngIf="email_edit.errors.email">
+                                                Email inválido
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="float: right">
+                                <button type="button" class="btn btn-danger btn-raised" (click)="c('Close click')">
+                                    Cancelar
+                                </button>
+                                <button type="button" class="btn btn-info btn-raised" (click)="update()"
+                                        [disabled]="!formCount.valid || (operator.email == '' || operator.email == null) ||
+                                                           (operator.password == ''  || operator.email == null)">Salvar
+                                </button>
+
+                            </div>
+                        </form>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </ng-template>
+</section>
